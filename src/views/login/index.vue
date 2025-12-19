@@ -15,7 +15,7 @@ const login = async () => {
     ElMessage.success('登录成功')
     // 保存用户信息
     localStorage.setItem('loginUser',JSON.stringify(res.data))
-
+    localStorage.setItem('token',res.data.token)
     // 跳转
     router.push('/')
   }else{
