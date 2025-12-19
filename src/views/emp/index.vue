@@ -12,6 +12,8 @@ const genders = ref([{ name: '男', value: 1 }, { name: '女', value: 2 }])
 //部门列表数据
 const depts = ref([])
 
+//token
+const token = ref('');
 
 const addEmp = async () => { 
   employee.value = {username: '', name: '', gender: '', phone: '', job: '', salary: '', deptId: '', entryDate: '', image: '', exprList: []};
@@ -97,7 +99,16 @@ const search = async() => {
 onMounted(() => {
   search();
   queryDeptList();
+  getToken();
 });
+
+//获取token
+const getToken =  () => { 
+  const tokens = localStorage.getItem('token')
+  if (tokens){
+    token.value = tokens;
+  }
+}
 
 //清空
 const clear = () => {
@@ -446,6 +457,7 @@ const handleSelectionChange = (val) => {
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"
+                :headers="{'token': token}"
                 >
                 <img v-if="employee.image" :src="employee.image" class="avatar" />
                 <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>

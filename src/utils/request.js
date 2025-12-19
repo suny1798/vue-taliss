@@ -18,7 +18,6 @@ request.interceptors.response.use(
 //请求 request 拦截器
 request.interceptors.request.use(
   (config) => { //成功回调
-    console.log(config)
     const token = localStorage.getItem('token')
     if (token) {
       config.headers.token = token
